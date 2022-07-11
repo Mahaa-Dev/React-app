@@ -14,6 +14,19 @@ export default function TextForm(props) {
         let newText = text.toLowerCase();
         setText(newText);
     }
+
+    const handleCopy = () => {
+
+        var text = document.getElementById("myBox");
+        text.select();
+
+        navigator.clipboard.writeText(text.value);
+    }
+
+    const handleExtraSpace = () => {
+        let newnText = text.split(/[ ]+/);
+        setText(newnText.join(" "))
+    }
     const handleOnChange = (event) => {
         //   console.log("Uppercase was clicked");
         setText(event.target.value);
@@ -24,10 +37,12 @@ export default function TextForm(props) {
         <>
             <div className="container">
                 <h1>{props.heading}</h1>
-                <div className="container">
-                    <textarea className="form-control mb-3" value={text} onChange={handleOnChange} id="myBox" rows="8"></textarea>
-                    <button className="btn btn-primary mx-2" onClick={handleUpClick}>Convert To Uppercase</button>
-                    <button className="btn btn-primary mx-2" onClick={handleLoClick}>Convert To Lowercase</button>
+                <div className="my-3">
+                    <textarea className="form-control" value={text} onChange={handleOnChange} id="myBox" rows="8"></textarea>
+                    <button className="btn btn-primary mx-1" onClick={handleUpClick}>Convert To Uppercase</button>
+                    <button className="btn btn-primary mx-1" onClick={handleLoClick}>Convert To Lowercase</button>
+                    <button className="btn btn-primary mx-1" onClick={handleCopy}>Copy Text</button>
+                    <button className="btn btn-primary mx-1" onClick={handleExtraSpace}>Clear Spaces</button>
                 </div>
             </div>
 
